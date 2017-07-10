@@ -38,15 +38,16 @@ public class SyllableSlam{
 		for(int i=0; i<word.length();i++){
 			char c = word.charAt(i);
 			if(isVowel(c)){		
-				if(lastCharVowel==true){ //Two vowels in a row
-					
+				if(i == word.length()-1 && c=='e'){
+					break;
+				}
+				
+				if(lastCharVowel==true){ //Two vowels in a row	
 					//if the last char is the same as this char
-					//dont increment? 
 					if(c != (word.charAt(i-1))){
 						//not the same vowel
 						count++;
 					}
-					
 				}else{ //not two vowels in a row
 					count++; 
 				}	
@@ -55,8 +56,7 @@ public class SyllableSlam{
 				lastCharVowel =false; 
 			}		
 		}
-		
-		return count;
+		return count==0 ? 1 : count;
 	}
 	
 	public boolean isVowel(char c){

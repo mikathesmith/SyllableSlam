@@ -2,15 +2,22 @@ import java.util.*;
 import java.io.*;
 
 public class SyllableSlam{
-	ArrayList<char> vowels = new ArrayList<char>(); 
+	private ArrayList<Character> vowels = new ArrayList<Character>(); 
+	
+	public SyllableSlam(){
+		vowels.add('a');
+		vowels.add('e');
+		vowels.add('i');
+		vowels.add('o');
+		vowels.add('u');
+	}
 	
 	public static void main(String[]args){
-		SyllableSlam 
-		
-	
+		new SyllableSlam().start();
 	}
 	
 	public void start(){
+		
 		Scanner sc = new Scanner(System.in);
 		
 		while(sc.hasNext()){
@@ -35,6 +42,6 @@ public class SyllableSlam{
 	}
 	
 	public boolean isVowel(char c){
-		
+		return vowels.indexOf(c)!=-1;
 	}
 }

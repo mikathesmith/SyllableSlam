@@ -29,13 +29,31 @@ public class SyllableSlam{
 	}
 	
 	public int estimateSyllables(String word){
+		
+		//if 2 vowels in a row, 
+		
 		int count = 0; 
+		boolean lastCharVowel = false; 
 		
 		for(int i=0; i<word.length();i++){
 			char c = word.charAt(i);
-			if(isVowel(c)){
-				count++;
-			}
+			if(isVowel(c)){		
+				if(lastCharVowel==true){ //Two vowels in a row
+					
+					//if the last char is the same as this char
+					//dont increment? 
+					if(c != (word.charAt(i-1))){
+						//not the same vowel
+						count++;
+					}
+					
+				}else{ //not two vowels in a row
+					count++; 
+				}	
+				lastCharVowel=true;
+			}else{
+				lastCharVowel =false; 
+			}		
 		}
 		
 		return count;

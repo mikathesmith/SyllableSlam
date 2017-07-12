@@ -22,10 +22,42 @@ public class SyllableSlam{
 		
 		while(sc.hasNext()){
 			String word = sc.next();
-			int syllableFreq = estimateSyllables(word);
-			System.out.println(syllableFreq);
+			System.out.println(word + ": " + getSyllables(word.toLowerCase()));
 		}
 		sc.close(); 
+	}
+	
+	public int getSyllables(String word) {
+		int syllables = 0;
+		char[] chars = word.toCharArray();
+		
+		ArrayList<Boolean> silents = new ArrayList<Boolean>();		
+		for (char c : chars) silents.add(false);
+		
+		// If the last character is an 'e' and there is a preceding vowel, mark this 'e' as silent
+		if (chars[chars.length - 1] == 'e' && hasVowel(chars, 0, chars.length - 1)) {
+			silents.set(chars.length - 1, true);
+		}
+		
+		// If the word ends with 'le' and the preceding character is a consonant, unmark it as silent
+		if (word.endsWith("le") && word.length() > 2 && !isVowel(chars[chars.length - 3])) {
+			silents.set(chars.length - 1, false);
+		}
+		
+		// If the word ends with 'les' and the preceding character is not a consonant, mark the 'e' as silent
+		if (word.endsWith("les") && word.length() > 3 && isVowel(chars[chars.length - 4])) {
+			silents.set(chars.length - 2, true);
+		}
+		
+		// TODO: Dipthongs and Tripthongs
+		
+		for (int i = 0; i < chars.length; ++i) {
+			char c = chars[i];
+			if (isVowel(c) && !silents.get(i)) syllables++;
+		}
+		
+		// Always assume at least 1 syllable
+		return syllables == 0 ? 1 : syllables;
 	}
 	
 	public int estimateSyllables(String word){
@@ -74,5 +106,12 @@ public class SyllableSlam{
 	
 	public boolean isVowel(char c){
 		return vowels.indexOf(c)!=-1;
+	}
+	
+	public boolean hasVowel(char[] chars, int from, int to) {
+		for(int i = from; i < to; ++i) {
+			if (isVowel(chars[i])) return true;
+		}
+		return false;
 	}
 }

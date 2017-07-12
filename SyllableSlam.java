@@ -39,7 +39,11 @@ public class SyllableSlam{
 			char c = word.charAt(i);
 			if(isVowel(c)){		
 				if(i == word.length()-1 && c=='e'){
-					break;
+					if(word.length()-2 == 'l'){
+						count++;
+					}else{
+						break;
+					}
 				}
 				
 				if(lastCharVowel==true){ //Two vowels in a row	

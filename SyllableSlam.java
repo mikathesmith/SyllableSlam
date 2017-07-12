@@ -30,8 +30,6 @@ public class SyllableSlam{
 	
 	public int estimateSyllables(String word){
 		
-		//if 2 vowels in a row, 
-		
 		int count = 0; 
 		boolean lastCharVowel = false; 
 		
@@ -41,35 +39,14 @@ public class SyllableSlam{
 			if(i==word.length()-1 && word.length()>2 && (c=='e' || c=='s')){
 				
 				if(c=='e' && word.charAt(i-1) == 'l' && !isVowel(word.charAt(i-2))) {
-					//System.out.println("last letter is Xle where X is a consonant!");
 					count++;
 				}else if(c=='s' && word.charAt(i-1) == 'e' && word.charAt(i-2) == 'l' && !isVowel(word.charAt(i-3))){
-				//	System.out.println("last letter is Xles where X is a consonant!");
+					//Double check this works! 
 					count++;
 				}else{
 					break;
 				}
 			}else if(isVowel(c)){	
-				//if(word.length() > 2){
-					//System.out.println("here!");
-					//if(i == word.length()-1 && c=='e'){ 
-						//add syllable if word ends in le and letter before l is a consonant
-					//	if(word.charAt(i-2) == 'l' && !isVowel(word.charAt(i-3))) {
-					//		count++;
-							//System.out.println("here!");
-						//}else{
-						//	break;
-						//}
-					//}
-					//else if(i == word.length()-1 && c=='s'){
-						//add syllable if word ends in les and letter before l is a consonant
-					//	if(word.charAt(i-2) == 'e' && word.charAt(i-2) == 'l' && !isVowel(word.charAt(i-3))) {
-					//		count++;
-					//	}else {
-					//		break;
-					//	}
-					//}
-				//}
 				if(lastCharVowel==true){ //Two vowels in a row	
 					//if the last char is the same as this char
 					if(c != (word.charAt(i-1))){
@@ -81,6 +58,11 @@ public class SyllableSlam{
 				}
 				lastCharVowel=true;
 			}else{
+				if(i!=0 && c=='y'){
+					//If it a 'y' and is not the first letter of the word, then it is a new sound
+					count++;
+				}
+				
 				lastCharVowel =false;
 			}
 				

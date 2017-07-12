@@ -39,18 +39,13 @@ public class SyllableSlam{
 			char c = word.charAt(i);
 			if(isVowel(c)){		
 				if(i == word.length()-1 && c=='e'){
-					if(word.length()-2 == 'l') {
-						if(word.length() > 4){
-							count++;
-						}else if(word.length() == 4 && isVowel(word.charAt(0)){
-							count++;
-						}else{
-							break;
-						}
+					//add syllable if word ends in le and letter before l is a consonant
+					if(word.length()-2 == 'l' && !isVowel(word.length()-3)) {
+						count++;
 					}else {
 						break;
 					}
-				}
+				} //need rule for les?
 				
 				if(lastCharVowel==true){ //Two vowels in a row	
 					//if the last char is the same as this char

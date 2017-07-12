@@ -71,7 +71,23 @@ public class SyllableSlam{
 			silents.set(chars.length - 2, true);
 		}
 		
-		// TODO: Dipthongs and Tripthongs, double same vowels
+		// If the same vowel appears twice in a row, mark the second occurence as silent
+		for (int i = 1; i < chars.length; ++i) {
+			char c = chars[i];
+			char p = chars[i - 1];
+			if (isVowel(c) && c == p) silents.set(i, true);
+		}
+		
+		// TODO: Dipthongs and Tripthongs
+		for (int i = 2; i < chars.length; ++i) {
+			char c = chars[i];
+			char p = chars[i - 1];
+			char pp = chars[i - 2];
+			if (pp == 'i' && p == 'o' && c == 'u') {
+				silents.set(i - 1, true);
+				silents.set(i, true);
+			}
+		}
 		
 		for (int i = 0; i < chars.length; ++i) {
 			char c = chars[i];

@@ -22,7 +22,7 @@ public class SyllableSlam{
 		
 		while(sc.hasNext()){
 			String word = sc.next();
-			int syllableFreq = estimateSyllables(word);
+			int syllableFreq = estimateSyllables(word.toLowerCase());
 			System.out.println(word + " " +syllableFreq);
 		}
 		sc.close(); 

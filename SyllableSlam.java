@@ -43,6 +43,8 @@ public class SyllableSlam{
 						//add syllable if word ends in le and letter before l is a consonant
 						if(word.charAt(i-2) == 'l' && !isVowel(word.charAt(i-3))) {
 							count++;
+						}else{
+							break;
 						}
 					}else if(i == word.length()-1 && c=='s'){
 						//add syllable if word ends in les and letter before l is a consonant

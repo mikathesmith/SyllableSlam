@@ -39,7 +39,7 @@ public class SyllableSlam{
 			char c = word.charAt(i);
 			if(isVowel(c)){		
 				if(i == word.length()-1 && c=='e'){
-					if(word.length()-2 == 'l' && word.length() > 4){
+					if(word.length()-2 == 'l' && (word.length() > 4 || isVowel(word.charAt(0))){
 						count++;
 					}else{
 						break;

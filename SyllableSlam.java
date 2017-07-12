@@ -39,9 +39,15 @@ public class SyllableSlam{
 			char c = word.charAt(i);
 			if(isVowel(c)){		
 				if(i == word.length()-1 && c=='e'){
-					if(word.length()-2 == 'l' && (word.length() > 4 || isVowel(word.charAt(0))){
-						count++;
-					}else{
+					if(word.length()-2 == 'l') {
+						if(word.length() > 4){
+							count++;
+						}else if(word.length() == 4 && isVowel(word.charAt(0)){
+							count++;
+						}else{
+							break;
+						}
+					}else {
 						break;
 					}
 				}

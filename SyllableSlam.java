@@ -1,9 +1,21 @@
+/*
+ * Etude 1: Syllable Slam
+ * 
+ * Authors: Nathan Harding, Mika Smith, Kimberley Louw, Mathew Boyes
+ * 
+ * Takes in a word as input and prints the number of syllables that word has. 
+ * 
+ */
+
 import java.util.*;
 import java.io.*;
 
 public class SyllableSlam{
 	private ArrayList<Character> vowels = new ArrayList<Character>(); 
 	
+	/*
+	 * This constructor adds the vowels to the list of vowels.
+	 */
 	public SyllableSlam(){
 		vowels.add('a');
 		vowels.add('e');
@@ -12,10 +24,16 @@ public class SyllableSlam{
 		vowels.add('u');
 	}
 	
+	/*
+	 * The main method creates a new instance of the SyllableSlam class and starts it. 
+	 */
 	public static void main(String[]args){
 		new SyllableSlam().start();
 	}
 	
+	/*
+	 * This method starts the program by scanning in input and calling methods on it. 
+	 */
 	public void start(){
 		
 		Scanner sc = new Scanner(System.in);
@@ -27,12 +45,15 @@ public class SyllableSlam{
 		}
 		sc.close(); 
 	}
-	
+	/*
+	 * This method returns the number of syllables in a word by checking against various rules. 
+	 */
 	public int estimateSyllables(String word){
 		
 		int count = 0; 
 		boolean lastCharVowel = false; 
 		
+		//Iterate through every character in the word. 
 		for(int i=0; i<word.length();i++){
 			char c = word.charAt(i);
 			
@@ -47,19 +68,18 @@ public class SyllableSlam{
 					break;
 				}
 			}else if(isVowel(c)){	
-				if(lastCharVowel==true){ //Two vowels in a row	
-					//if the last char is the same as this char
+				if(lastCharVowel){ //Two vowels in a row	
+					//If the last char is not the same as this char
 					if(c != (word.charAt(i-1))){
-						//not the same vowel
 						count++;
 					}
-				}else{ //not two vowels in a row
+				}else{ //If there are not two vowels in a row
 					count++; 
 				}
 				lastCharVowel=true;
 			}else{
 				if(i!=0 && c=='y'){
-					//If it a 'y' and is not the first letter of the word, then it is a new sound
+					//If it a 'y' and is not the first letter of the word, then it is a new syllable.
 					count++;
 				}
 				
@@ -67,9 +87,14 @@ public class SyllableSlam{
 			}
 				
 		}
+		
+		//Returns the count if it is not 0, otherwise returns 1 as a word has at least 1 syllable. 
 		return count==0 ? 1 : count;
 	}
 	
+	/*
+	 * This method returns true if a character is a vowel, and false if it is a consonant.
+	 */
 	public boolean isVowel(char c){
 		return vowels.indexOf(c)!=-1;
 	}

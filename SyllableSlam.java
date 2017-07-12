@@ -1,5 +1,5 @@
 /*
- * Etude 1: Syllable Slam
+ * Etude 2: Syllable Slam
  * 
  * Authors: Nathan Harding, Mika Smith, Kimberley Louw, Mathew Boyes
  * 

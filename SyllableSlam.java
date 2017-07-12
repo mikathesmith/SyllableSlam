@@ -37,23 +37,22 @@ public class SyllableSlam{
 		
 		for(int i=0; i<word.length();i++){
 			char c = word.charAt(i);
-			if(isVowel(c)){		
-				if(i == word.length()-1 && c=='e'){
-					//add syllable if word ends in le and letter before l is a consonant
-					if(word.charAt(i-2) == 'l' && !isVowel(word.charAt(i-3)) {
-						count++;
-					}else {
-						break;
-					}
-				else if(i == word.length()-1 && c=='s'){
-					//add syllable if word ends in les and letter before l is a consonant
-					if(word.charAt(i-2) == 'e' && word.charAt(i-2) == 'l' && !isVowel(word.charAt(i-3)) {
-						count++;
-					}else {
-						break;
+			if(isVowel(c)){	
+				if(word.length() > 2){
+					if(i == word.length()-1 && c=='e'){
+						//add syllable if word ends in le and letter before l is a consonant
+						if(word.charAt(i-2) == 'l' && !isVowel(word.charAt(i-3))) {
+							count++;
+						}
+					}else if(i == word.length()-1 && c=='s'){
+						//add syllable if word ends in les and letter before l is a consonant
+						if(word.charAt(i-2) == 'e' && word.charAt(i-2) == 'l' && !isVowel(word.charAt(i-3))) {
+							count++;
+						}else {
+							break;
+						}
 					}
 				}
-				
 				if(lastCharVowel==true){ //Two vowels in a row	
 					//if the last char is the same as this char
 					if(c != (word.charAt(i-1))){
@@ -62,7 +61,7 @@ public class SyllableSlam{
 					}
 				}else{ //not two vowels in a row
 					count++; 
-				}	
+				}
 				lastCharVowel=true;
 			}else{
 				lastCharVowel =false; 
